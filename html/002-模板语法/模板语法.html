@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <script type="text/javascript" src="../vue.js"></script>
+</head>
+<body>
+
+  <div id="app">
+    
+    <h2>双大括号表达式</h2>
+    <p>{{message}}</p>
+    <p>{{message.toUpperCase()}}</p>
+    
+    <h2>强制绑定数据v-code/:</h2>
+    <p v-html="html"></p>
+    <p v-text="html"></p>
+    <img :src="imgUrl"/>
+  
+    <h2>双向数据绑定</h2>
+    <input type="text" v-model="username">
+    <p>{{username}}</p>
+    
+    <h2>绑定事件监听</h2>
+    <button @click="btn1Click">按钮1</button>
+    <button @click='btn2Click("username")'>按钮2</button>
+    
+  </div>
+
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        username: 'zhouyu',
+        message: 'zhouyu',
+        html: '<a href="www.baidu.com">百度一下</a>',
+        imgUrl: 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo_top_86d58ae1.png'
+      },
+      methods: {
+        btn1Click() {
+          alert('zhouyu')
+        },
+        btn2Click(arg) {
+          alert(arg)
+        }
+      }
+    })
+  </script>
+</body>
+</html>
