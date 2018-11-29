@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script type="text/javascript" src="../vue.js"></script>
+	
+	<style>
+		.dog-item {
+			margin-bottom: 4px;
+		}
+	</style>
+</head>
+<body>
+
+	<div id="App">
+		<!--v-for遍历数组,更新和删除-->
+		<ul>
+			<li :class="item" v-for="(dog, index) in dogs" :key="index">{{index}}. dog的名字是{{dog.name}},年龄是{{dog.age}}岁
+				<button @click="deleteDog(index)">删除</button>
+				<button @click="updateDog(index, {name: 'jie', age: 8})">更新</button>
+			</li>
+		</ul>
+		<!--v-for遍历对象-->
+		<ul>
+			<li v-for="(value, key) in animal" :key="key">{{key}}---{{value}}</li>
+		</ul>
+	</div>
+	<script>
+		const vm = new Vue({
+			el: '#App',
+			data: {
+				item: 'dog-item',
+				dogs: [//本身只监测dogs,而不是内部的数据
+					{name: 'jom', age: 1},
+					{name: 'fes', age: 2},
+					{name: 'ges', age: 3},
+					{name: 'bdd', age: 4},
+					{name: 'aef', age: 5},
+				],
+				animal: {
+					name: 'jiaefae',
+					age: 14,
+					height: 13,
+					run: 'slow',
+					status: 'happly'
+				}
+			},
+			methods: {
+				deleteDog(index) {
+					this.dogs.splice(index, 1)
+				},
+				updateDog(index, dog) {
+					console.log(dog)//数据变了,视图没变
+					//改变的只是dogs内部的数据,而dogs并没有变
+					//数组变异方法,会触发视图更新push,pop,shift,unshift,splice,reverse都可以
+					//splice可以实现一个或多个数据的增删改
+					this.dogs.splice(index, 1, dog)
+				}
+			}
+		})
+	</script>
+
+</body>
+</html>
