@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../vue.js"></script>
+	
+	<style>
+		.aClass {
+			color: red;
+		}
+		.bClass {
+			color: green;
+		}
+		.cClass {
+			font-size: 30px;
+		}
+	</style>
+</head>
+<body>
+	<!--专门处理动态样式效果-->
+    <div id="App">
+	    <!--class绑定-->
+	    <!--:class='xxx' 字符串-->
+        <p class="cClass" :class="a">xxx是字符串</p>
+	    <button @click="changeColor">改变颜色</button>
+	
+	    <!--:class='xxx' 对象-->
+	    <p :class="{aClass: isAClass, bClass: isBClass}">xxx是对象</p>
+	
+	    <!--:class='xxx' 对象-->
+	    <p :class="['aClass', 'bClass']">xxx是数组</p>
+	    
+	    
+	    <!--style绑定-->
+	    <!--activeColor和fontSize是data的属性-->
+	    <p :style="{color: activeColor, fontSize: fontSize + 'px'}">:style='{color: value, fontsize: fontsize + 'px'}'</p>
+    </div>
+	
+	<script>
+		const vm = new Vue({
+			el: '#App',
+			data: {
+				a: 'aClass',
+				isAClass: true,
+				isBClass: true,
+				activeColor: 'red',
+				fontSize: 20
+			},
+			methods: {
+				changeColor() {
+					this.a = 'bClass'
+					this.isBClass = !this.isBClass
+					this.activeColor = 'green'
+					this.fontSize = 30
+				}
+			}
+		})
+	</script>
+</body>
+</html>

@@ -3,51 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-  <script type="text/javascript" src="../vue.js"></script>
+    <script type="text/javascript" src="../vue.js"></script>
 </head>
 <body>
 
-  <div id="app">
+<div id="app">
     姓: <input type="text" placeholder="first name" v-model="firstname"><br>
     名: <input type="text" placeholder="last name" v-model="lastname"><br>
     姓名1(单向): <input type="text" placeholder="full name1" v-model="fullname1"><br>
     姓名2(单向): <input type="text" placeholder="full name2" v-model="fullname2"><br>
     姓名3(双向): <input type="text" placeholder="full name3" v-model="fullname3"><br>
-  </div>
+</div>
 
 <script>
-  var vm = new Vue({
-    el: '#app',
-    data: {
-      firstname: 'A',
-      lastname: 'B',
-      fullname2: 'A B'
-    },
-    computed: {
-      //初始化的时候执行,相关数据发生改变时执行
-      fullname1 () {
-        return this.firstname + ' ' + this.lastname
-      },
-      //双向绑定
-      fullname3: {
-        get() {
-          return this.firstname + ' ' + this.lastname
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            firstname: 'A',
+            lastname: 'B',
+            fullname2: 'A B'
         },
-        set() {
-        
+        computed: {
+            //初始化的时候执行,相关数据发生改变时执行
+            fullname1 () {
+                return this.firstname + ' ' + this.lastname
+            },
+            //双向绑定
+            fullname3: {
+                get() {
+                    return this.firstname + ' ' + this.lastname
+                },
+                set(value) {
+                    const names = value.slice(' ')
+                    console.log(names)
+                    this.firstname = names[0]
+                    this.lastname = names[1]
+                }
+            }
+        },
+        watch: {//配置监视
+            firstname: function(value) {
+                this.fullname1 = value + ' ' + this.lastname
+            }
         }
-      }
-    },
-    watch: {//配置监视
-      firstname: function(value) {
-        this.fullname1 = value + ' ' + this.lastname
-      }
-    }
-  })
-  
-  vm.$watch('lastname', function (value) {
-    this.fullname2 = this.firstname + ' ' + value
-  })
+    })
+    
+    vm.$watch('lastname', function (value) {
+        this.fullname2 = this.firstname + ' ' + value
+    })
 </script>
 </body>
 </html>
