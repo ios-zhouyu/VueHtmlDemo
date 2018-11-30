@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../vue.js"></script>
+    <script type="text/javascript" src="./vue-myPlugin.js"></script>
+</head>
+<body>
+
+    <div id="App">
+        <p v-upper-text="msg"></p>
+    </div>
+    
+    <script>
+        //调用 `MyPlugin.install(Vue)`
+        Vue.use(MyPlugin)
+        //自定义插件的全局方法
+        Vue.myGlobalMethod()
+        Vue.mixin
+        
+        const vm = new Vue({
+            el: '#App',
+            data: {
+            	msg: 'jise fsaFEfe FEFifs!!!'
+            },
+            computed: {},
+            methods: {}
+        })
+        //自定义插件的实例方法
+        vm.$myMethod()
+    </script>
+</body>
+</html>
