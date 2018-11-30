@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../vue.js"></script>
+</head>
+<body>
+
+    <div id="App">
+        <form action="" @submit.stop="handleSubmit">
+            <div>
+                <span>用户名: </span>
+                <input type="text" v-model="username">
+            </div>
+            <div>
+                <span>密码: </span>
+                <input type="password" v-model="pwd">
+            </div>
+            <div>
+                <span>性别: </span>
+                <input type="radio" id="female" v-model="sex" value="女">
+                <label for="female">女</label>
+                <input type="radio" id="male" v-model="sex" value="男">
+                <label for="male">男</label>
+            </div>
+            <div>
+                <span>爱好: </span>
+                <input type="checkbox" value="篮球" v-model="likes" id="basket">
+                <label for="basket">篮球</label>
+                <input type="checkbox" value="足球" v-model="likes" id="foot">
+                <label for="foot">足球</label>
+                <input type="checkbox" value="乒乓" v-model="likes" id="pingpang">
+                <label for="pingpang">乒乓</label>
+            </div>
+            <div>
+                <span>城市: </span>
+                <select v-model="cityId">
+                    <option disabled value="">未选择</option>
+                    <option v-for="(city, index) in allCitys" :key="index" :value="city.id">{{city.name}}</option>
+                </select>
+            </div>
+            <div>
+                <span>介绍: </span>
+                <textarea name="" id="" cols="30" rows="5" v-model="desc"></textarea>
+            </div>
+            <div>
+                <input type="submit" value="注册">
+            </div>
+        </form>
+    </div>
+    
+    <script>
+        const vm = new Vue({
+            el: '#App',
+            data: {
+            	username:'',
+                pwd:'',
+                sex: '女',
+	            likes: ['足球'],
+                allCitys: [
+                    {id: 1, name: '北京'},
+                    {id: 2, name: '上海'},
+                    {id: 3, name: '杭州'},
+                    {id: 4, name: '重庆'},
+                    {id: 5, name: '武汉'}
+                ],
+                cityId: 1, //默认选择北京
+                desc: ''
+            },
+            computed: {},
+            methods: {
+	            handleSubmit() {
+	            	console.log(this.username, this.pwd)
+                }
+            }
+        })
+    </script>
+</body>
+</html>
