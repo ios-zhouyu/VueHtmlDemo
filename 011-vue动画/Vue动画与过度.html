@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../vue.js"></script>
+    
+    <style>
+        .fade-enter-active, .fade-leave-active {
+            transition: opacity 2s;
+        }
+        .fade-enter, .fade-leave-to {
+            opacity: 0;
+        }
+        
+        .move-enter-active, .move-leave-active {
+            transition: all 2s;
+        }
+        .move-enter, .move-leave-to {
+            opacity: 0;
+            transform: translate(20px);
+        }
+    </style>
+</head>
+<body>
+    <!--v-enter-->
+    <!--v-enter-active-->
+    <!--v-enter-to-->
+
+    <!--v-leave-active-->
+    <!--v-leave-to-->
+    <!--v-leave-->
+    <div id="App1">
+        <button @click="isShow = !isShow">toggle</button>
+        
+        <transition name="fade">
+            <p v-show="isShow">哈哈哈哈</p>
+        </transition>
+    </div>
+
+    <div id="App2">
+        <button @click="isShow = !isShow">toggle</button>
+    
+        <transition name="move">
+            <p v-show="isShow">哈哈哈哈</p>
+        </transition>
+    </div>
+    
+    <script>
+        const vm1 = new Vue({
+            el: '#App1',
+            data() {
+            	return {
+            		isShow: true
+                }
+            },
+            computed: {},
+            methods: {}
+        })
+
+        const vm2 = new Vue({
+	        el: '#App2',
+	        data() {
+		        return {
+			        isShow: true
+		        }
+	        },
+	        computed: {},
+	        methods: {}
+        })
+    </script>
+</body>
+</html>
