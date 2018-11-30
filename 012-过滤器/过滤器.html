@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../vue.js"></script>
+</head>
+<body>
+    <!--用于一些常见的文本格式化-->
+    <div id="App">
+        <p>{{date}}</p>
+        <p>{{date | filterName}}</p>
+    </div>
+    
+    <script>
+        Vue.filter('filterName', function (value) {
+            return Date.parse(value)
+        })
+        
+        const vm = new Vue({
+            el: '#App',
+            data: {
+            	date: new Date()
+            },
+            computed: {},
+            methods: {}
+        })
+    </script>
+</body>
+</html>
