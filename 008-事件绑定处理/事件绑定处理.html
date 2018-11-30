@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../vue.js"></script>
+    
+    <style>
+        .out {
+            width: 200px;
+            height: 200px;
+            background-color: aqua;
+            margin-top: 20px;
+        }
+        .inner {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="App">
+        <!--1. 事件监听-->
+        <button @click="test1">text1</button>
+        <button @click="test2('zhouyu')">text2</button>
+        <button @click="test3($event)">text3</button>
+        <button @click="test4('zhouyu', $event)">text4</button>
+        
+        <!--2. 事件修饰符 事件冒泡.stop .prevent .capture .self .once .passive-->
+        <!--利用stop来阻止事件冒泡-->
+        <div class="out" @click="outDivClick">
+            <div class="inner" @click.stop="innerDivClick"></div>
+        </div>
+        <!--提交事件不再重载页面-->
+        <a href="https://www.baidu.com" @click.prevent="text5">百度一下</a>
+        
+        <!--3. 按键修饰符-->
+        <!--.enter-->
+        <!--.tab-->
+        <!--.delete (捕获“删除”和“退格”键)-->
+        <!--.esc-->
+        <!--.space-->
+        <!--.up-->
+        <!--.down-->
+        <!--.left-->
+        <!--.right-->
+        <!--.ctrl-->
+        <!--.alt-->
+        <!--.shift-->
+        <!--.meta-->
+        <!--.exact-->
+        <!--.left-->
+        <!--.right-->
+        <!--.middle-->
+        <input type="text" @keyup.enter="text6">
+    </div>
+
+    <script>
+        const vm = new Vue({
+            el: '#App',
+            data: {
+            
+            },
+            computed: {
+            
+            },
+            methods: {
+	            test1() {
+	            	alert()
+                },
+                test2(text) {
+	            	alert(text)
+                },
+	            test3(event) {
+	            	alert(event.target.innerHTML)
+                },
+	            test4(text, event) {
+	            	alert(text + event.target.innerHTML)
+                },
+
+	            outDivClick() {
+	            	alert('out')
+                },
+	            innerDivClick() {
+	            	alert('inner')
+                },
+	            text5() {
+	            	alert('不跳转到百度')
+                },
+	            text6(enent) {
+	            	alert(event.target.value)
+                }
+            }
+        })
+    </script>
+</body>
+</html>
