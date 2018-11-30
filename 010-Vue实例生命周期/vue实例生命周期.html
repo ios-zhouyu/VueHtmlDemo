@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../vue.js"></script>
+</head>
+<body>
+
+    <div id="App">
+        <button @click="destroyVue">销毁vue</button>
+        <p v-show="isShow">生命周期</p>
+    </div>
+    
+    <script>
+        const vm = new Vue({
+            el: '#App',
+            data: {
+            	isShow: true
+            },
+            computed: {},
+            methods: {
+	            destroyVue() {
+	            	this.$destroy()
+                }
+            },
+            beforeCreate() {
+	            console.log('beforeCreate')
+            },
+            created() {
+	            console.log('created')
+            },
+            beforeMount() {
+	            console.log('beforeMount')
+            },
+            beforeUpdate() {
+	            console.log('beforeUpdate')
+            },
+            updated() {
+	            console.log('update')
+            },
+            mounted() {
+	            console.log('mounted')
+                this.intervalId = setInterval(() => {
+                	console.log('----------')
+                    //data数据发生变化,会触发渲染,执行beforeUpdate和updated
+                	this.isShow = !this.isShow;
+                }, 1000)
+            },
+            beforeDestroy() {
+	            console.log('beforeDestroy')
+                clearInterval(this.intervalId)
+            },
+            destroyed() {
+                console.log('destroyed')
+            }
+        })
+    </script>
+</body>
+</html>
