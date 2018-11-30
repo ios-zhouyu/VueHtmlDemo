@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../vue.js"></script>
+    
+    <style>
+        /*属性选择器--防止闪屏*/
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    
+    <div id="App">
+        <p ref="name">zhouyu</p>
+        <button @click="hint">提示</button>
+        <p v-cloak>{{msg}}</p>
+        
+        <p v-upper-text="msg1"></p>
+        <p v-lower-text="msg1"></p>
+    </div>
+    
+    <script>
+        //全局指令
+        //el: 指令属性所在的标签对象
+        //binging: 包含指令相关信息数据的对象
+        Vue.directive('upper-text', function (el, binding) {
+            console.log(el, binding)
+            el.textContent = binding.value.toUpperCase()
+        })
+        
+        const vm = new Vue({
+            el: '#App',
+            data: {
+            	msg: '周玉',
+                msg1: 'SFJ jfFSE hisejifa SEifse!!'
+            },
+            computed: {},
+            methods: {
+	            hint() {
+	            	alert(this.$refs.name.textContent)
+                }
+            },
+            //局部自定义指令
+            directives: {
+            	'lower-text': function (el, binding) {
+		            el.textContent = binding.value.toLowerCase()
+	            }
+            }
+        })
+    </script>
+</body>
+</html>
