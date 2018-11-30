@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../vue.js"></script>
+</head>
+<body>
+
+    <div id="App">
+        <input type="text" v-model="searchName">
+        <ul>
+            <li v-for="(item, index) in filterDogs" :key="index">{{index}}--{{item.name}}--{{item.age}}</li>
+        </ul>
+        <button @click="setOrderType(1)">年龄升序</button>
+        <button @click="setOrderType(2)">年龄降序</button>
+        <button @click="setOrderType(0)">原来顺序</button>
+    </div>
+
+    <script>
+        const vm = new Vue({
+            el: '#App',
+            data: {
+	            item: 'dog-item',
+	            dogs: [//本身只监测dogs,而不是内部的数据
+		            {name: 'jom', age: 1},
+		            {name: 'fes', age: 2},
+		            {name: 'ges', age: 3},
+		            {name: 'bdd', age: 4},
+		            {name: 'aef', age: 5},
+	            ],
+	            searchName: '',
+                orderType: 0 //0: 原来顺序, 1: 升序, 2: 降序
+            },
+            computed: {
+	            filterDogs() {
+	            	const {searchName, dogs, orderType} = this
+                    let newDogs = dogs.filter(p => p.name.indexOf(searchName)!==-1)
+                    if (orderType !== 0) {
+                        newDogs.sort(function (dog1, dog2) {
+                            if (orderType === 2) {
+                            	return dog2.age - dog1.age
+                            } else {
+	                            return dog1.age - dog2.age
+                            }
+                        })
+                    }
+	            	return newDogs
+                }
+            },
+            methods: {
+	            setOrderType(type) {
+	            	this.orderType = type
+                }
+            }
+        })
+    </script>
+</body>
+</html>
