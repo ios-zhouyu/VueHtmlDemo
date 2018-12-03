@@ -2,21 +2,50 @@
     <div class="add">
         <div class="item">
             <p class="tip">用户名</p>
-            <input type="text" placeholder="用户名" class="username">
+            <input type="text" placeholder="用户名" class="username" v-model="name">
         </div>
         <div class="item">
             <p class="tip">评论内容</p>
-            <textarea aria-placeholder="评论内容" class="content"></textarea>
+            <textarea aria-placeholder="评论内容" class="content" v-model="content">{{content}}</textarea>
         </div>
         <div class="item">
-            <input type="submit" value="提交" class="submit">
+            <input type="submit" value="提交" class="submit" @click="add">
         </div>
     </div>
 </template>
 
 <script>
 	export default {
-		name: "Add"
+		name: "Add",
+        props: {
+	        addComment: {//指定属性名/属性值得类型/必要性
+				type: Function,
+                required: true
+            }
+        },
+        data() {
+			return {
+				name: '',
+                content: ''
+            }
+        },
+        methods: {
+	        add() {
+	        	const name = this.name.trim()
+                const content = this.content.trim()
+                if (!name || !content) {
+                	alert('姓名和评论内容不能为空')
+                    return
+                }
+                const comment = {
+                	name,
+                    content
+                }
+                this.addComment(comment)
+                this.name = ''
+                this.content = ''
+            }
+        }
 	}
 </script>
 

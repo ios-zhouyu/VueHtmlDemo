@@ -1,8 +1,7 @@
 <template>
     <div class="list">
         <p class="title">评论回复:</p>
-        <Item/>
-        <Item/>
+        <Item v-for="(comment, index) in comments" :key="index" :comment="comment"/>
     </div>
 </template>
 
@@ -10,6 +9,7 @@
     import Item from './Item'
 	export default {
 		name: "List",
+        props: ['comments'],
         components: {
 			Item
         }
