@@ -1,23 +1,34 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
-  </div>
+    <div id="app">
+        <Head/>
+        <div class="content">
+            <Add/>
+            <List/>
+        </div>
+        <router-view/>
+    </div>
 </template>
 
 <script>
-export default {
-  name: 'App'
-}
+
+	import Head from '@/components/Head'
+	import Add from '@/components/Add'
+	import List from '@/components/List'
+ 
+	export default {
+		name: 'App',
+        components: {
+	        Head,
+	        Add,
+	        List
+        }
+	}
+	
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+    #app {
+        color: #2c3e50;
+        margin-top: 20px;
+    }
 </style>
