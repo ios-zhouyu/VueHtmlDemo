@@ -1,7 +1,7 @@
 <template>
     <div class="item">
         <p class="username">{{comment.name}}:</p>
-        <button class="delete">删除</button>
+        <button class="delete" @click="deleteItem">删除</button>
         <p class="content">{{comment.content}}</p>
     </div>
 </template>
@@ -10,7 +10,15 @@
 	export default {
 		name: "Item",
         props: {
-	        comment: Object
+	        comment: Object,
+	        deleteComment: Function,
+	        index: Number
+        },
+        methods: {
+	        deleteItem() {
+	        	const {comment, index, deleteComment} = this //取出当前对象属性
+                deleteComment(index)
+            }
         }
 	}
 </script>
@@ -43,5 +51,6 @@
         border-style: solid;
         border-width: 1px;
         border-color: #cccccc;
+        color: #0000ff;
     }
 </style>

@@ -3,7 +3,7 @@
         <Head/>
         <div class="content">
             <Add :addComment="addComment"/>
-            <List :comments="comments"/>
+            <List :comments="comments" :deleteComment="deleteComment"/>
         </div>
         <router-view/>
     </div>
@@ -47,6 +47,9 @@
         methods: {
 			addComment(comment) {//将此方法传递给子组件
 				this.comments.unshift(comment)
+            },
+            deleteComment(index) {
+				this.comments.splice(index, 1)
             }
         }
 	}
